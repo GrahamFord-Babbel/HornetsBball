@@ -8,6 +8,10 @@ public class KembaShot : MonoBehaviour
     public BallThrownScript ballThrownScript;
     public GameObject hoopTarget;
     public float shootAngle = 45.0f;
+    public bool kembaJerseyActive;
+
+    public float cooldown;
+    public float cooldownLength = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,13 +22,26 @@ public class KembaShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            if (ballThrownScript.ballThrown ==true)
-                {
-                    shotball = ballThrownScript.shotball;
-                    shotball.GetComponent<Rigidbody>().velocity = BallisticVelocity(hoopTarget.transform, shootAngle);
-                    //Destroy(cannonBall, 10); // cannonball disappears after 10 seconds
-                }
+        if (kembaJerseyActive)
+        {
 
+            //start boost timer
+            cooldown -= Time.deltaTime;
+
+            if (ballThrownScript.ballThrown == true)
+            {
+                shotball = ballThrownScript.shotball;
+                shotball.GetComponent<Rigidbody>().velocity = BallisticVelocity(hoopTarget.transform, shootAngle);
+
+               
+            }
+
+            if (cooldown <= 0)
+            {
+                kembaJerseyActive = false;
+                cooldown = cooldownLength;
+            }
+        }
     }
 
     Vector3 BallisticVelocity(Transform target, float angle)

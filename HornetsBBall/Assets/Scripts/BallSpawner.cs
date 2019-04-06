@@ -16,7 +16,7 @@ public class BallSpawner : MonoBehaviour {
     Vector3 ballLocation;
 
     private float cooldown;
-    private float cooldownLength = 0.5f;
+    private float cooldownLength = 3f;
 
     void Awake()
     {
@@ -67,16 +67,18 @@ public GameObject GetPooledBall()
 	// Update is called once per frame
 	void Update () {
 
-        //instantiate ball if old ball has been thrown
-        if (ballThrownScript.ballThrown)
+        //instantiate ball if old ball has been thrown & timer sufficient
+        if (ballThrownScript.ballThrown && cooldown <= 0)
         {
             SpawnBall();
             ballThrownScript.ballThrown = false;
+            cooldown = cooldownLength;
         }
 
+        //countdown timer to when next ball CAN appear
+        cooldown -= Time.deltaTime;
 
 
-        //cooldown -= Time.deltaTime;
         //if(cooldown <= 0)
         //{
         //    cooldown = cooldownLength;
