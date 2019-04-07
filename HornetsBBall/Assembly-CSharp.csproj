@@ -349,7 +349,7 @@
     <Compile Include="Assets\Scripts\BallSpawner.cs" />
     <Compile Include="Assets\Scripts\BallThrownScript.cs" />
     <Compile Include="Assets\Scripts\CameraRotation.cs" />
-    <Compile Include="Assets\Scripts\DeleteBallFloor.cs" />
+    <Compile Include="Assets\Scripts\DeleteBallFloorJersey.cs" />
     <Compile Include="Assets\Scripts\DetectScoring.cs" />
     <Compile Include="Assets\Scripts\GameOverScoreDisplay.cs" />
     <Compile Include="Assets\Scripts\GoalTrigger1.cs" />

@@ -9,6 +9,7 @@ public class KembaShot : MonoBehaviour
     public GameObject hoopTarget;
     public float shootAngle = 45.0f;
     public bool kembaJerseyActive;
+    public GameObject kModeText;
 
     public float cooldown;
     public float cooldownLength = 3f;
@@ -16,7 +17,9 @@ public class KembaShot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        cooldown = cooldownLength;
+        kModeText = GameObject.Find("KMode");
+        kModeText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -26,18 +29,25 @@ public class KembaShot : MonoBehaviour
         {
 
             //start boost timer
+
             cooldown -= Time.deltaTime;
+
+            if (!kModeText.activeSelf)
+            {
+                kModeText.SetActive(true);
+            }
 
             if (ballThrownScript.ballThrown == true)
             {
                 shotball = ballThrownScript.shotball;
                 shotball.GetComponent<Rigidbody>().velocity = BallisticVelocity(hoopTarget.transform, shootAngle);
 
-               
+
             }
 
             if (cooldown <= 0)
             {
+                kModeText.SetActive(false);
                 kembaJerseyActive = false;
                 cooldown = cooldownLength;
             }

@@ -11,6 +11,7 @@ public class GuillermoDunk : MonoBehaviour
     public GameObject guillermoBall;
     public GameObject guillermoBallSpawn;
     public bool guillermoHeight;
+    public GameObject gModeText;
 
     //time limit to boost
     public float cooldown;
@@ -19,6 +20,9 @@ public class GuillermoDunk : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cooldown = cooldownLength;
+        gModeText = GameObject.Find("GMode");
+        gModeText.SetActive(false);
         guillermoHeight = false;
         guillermoBall.SetActive(false);
         guillermoBallSpawn.SetActive(false);
@@ -32,12 +36,13 @@ public class GuillermoDunk : MonoBehaviour
         {
             if (!guillermoHeight)
             {
+                gModeText.SetActive(true);
                 player1.transform.Translate(new Vector3(0, 5, 0));
                 guillermoHeight = true;
                 guillermoBallSpawn.SetActive(true);
                 guillermoBall.SetActive(true);
                 floor2.SetActive(true);
-                //guillermoJerseyActive = false;
+
             }
 
             cooldown -= Time.deltaTime;
@@ -45,6 +50,7 @@ public class GuillermoDunk : MonoBehaviour
 
         if (cooldown <= 0)
         {
+            gModeText.SetActive(false);
             guillermoBall.SetActive(false);
             guillermoBallSpawn.SetActive(false);
             floor2.SetActive(false);
