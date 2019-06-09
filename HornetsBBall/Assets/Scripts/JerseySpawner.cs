@@ -19,9 +19,12 @@ public class JerseySpawner : MonoBehaviour
     public GameObject netPosition;
     public GameObject[] positions = new GameObject[4];
 
+
     // Start is called before the first frame update
     void Start()
     {
+
+
     }
 
     // Update is called once per frame
@@ -32,23 +35,25 @@ public class JerseySpawner : MonoBehaviour
 
     public IEnumerator SpawnJersey()
     {
+        Debug.Log("IEnumerator called");
         positionNumber = Random.Range(1, 4);
         foreach (GameObject position in positions)
         {
             positionLocationNumber = System.Array.IndexOf(positions, position);
 
-            Debug.Log("the location entered:" + positionLocationNumber);
+            Debug.Log("the location entered:" + positionNumber + " matches? " + positionLocationNumber);
 
             if (positionNumber == positionLocationNumber)
             {
 
-                Debug.Log("Jersey ready to activate:" + positionNumber);
+                Debug.Log("Jersey ready to activate at: " + positionNumber);
 
                 //set jersey active
                 if (position != netPosition)
                 {
                     Debug.Log("Kemba Jersey Spawining in: " + jerseySpawnRate);
                     position.GetComponent<JerseyDeSpawner>().kembaJersey.SetActive(true);
+
                 }
                 else if (position == netPosition)
                 {

@@ -7,16 +7,19 @@ public class BallSpawner : MonoBehaviour {
     public static BallSpawner current;
 
     public GameObject pooledBall; //the prefab of the object in the object pool
-    public int ballsAmount = 5; //the number of objects you want in the object pool
+    public int ballsAmount; //the number of objects you want in the object pool
     public List<GameObject> pooledBalls; //the object pool
     public static int ballPoolNum = 0; //a number used to cycle through the pooled objects
 
     //interacts with grabber script
     public BallThrownScript ballThrownScript;
-    Vector3 ballLocation;
+    public Vector3 ballLocation;
 
     private float cooldown;
     private float cooldownLength = 3f;
+
+    public GameObject selectedBall;
+    public GameObject centerBallCart4Respawn;
 
     void Awake()
     {
@@ -78,21 +81,21 @@ public GameObject GetPooledBall()
         //countdown timer to when next ball CAN appear
         cooldown -= Time.deltaTime;
 
-
         //if(cooldown <= 0)
         //{
         //    cooldown = cooldownLength;
         //    SpawnBall();
         //}		
-	}
+    }
 
     void SpawnBall()
     {
-        GameObject selectedBall = BallSpawner.current.GetPooledBall();
-        selectedBall.transform.position = ballLocation;
+        selectedBall = BallSpawner.current.GetPooledBall();
+        selectedBall.transform.position = centerBallCart4Respawn.transform.position;
         Rigidbody selectedRigidbody = selectedBall.GetComponent<Rigidbody>();
         selectedRigidbody.velocity = Vector3.zero;
         selectedRigidbody.angularVelocity = Vector3.zero;
+        //selectedRigidbody.useGravity = false; //delete this if reactivating its gravity on grab doesn't work 6/9
         selectedBall.SetActive(true);
         
     }
