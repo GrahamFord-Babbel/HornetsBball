@@ -22,16 +22,24 @@ public class TeleportPoint : MonoBehaviour {
 
     private float lastLookAtTime = 0;
 
+    //added this, doesnt come with the Oculus script
+    //public GameObject travelPositionA;
+    //public GameObject travelPositionB;
 
+    // Use this for initialization
+    void Start () {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+        //delete these?
+        //travelPositionA = this.gameObject;
+        //travelPositionB = this.gameObject;
+
+    }
 
     public Transform GetDestTransform()
     {
+       
         return destTransform;
+        
     }
    
 
@@ -39,6 +47,11 @@ public class TeleportPoint : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //sad attempt
+        //print("teleport position: " + this.name);
+        //travelPositionB = this.gameObject;
+
         float intensity = Mathf.SmoothStep(fullIntensity, lowIntensity, (Time.time - lastLookAtTime) * dimmingSpeed);
         GetComponent<MeshRenderer>().material.SetFloat("_Intensity", intensity);
 	}

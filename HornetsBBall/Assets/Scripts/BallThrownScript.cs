@@ -24,7 +24,7 @@ public class BallThrownScript : MonoBehaviour
     {
         if(other.tag == "ball")
         {
-            Debug.Log(other.name);
+            Debug.Log("ball thrown: " + other.name);
             shotball = other.gameObject;
             ballThrown = true;
         }
